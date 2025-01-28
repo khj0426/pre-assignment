@@ -1,20 +1,20 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { getProducts } from "../../../_actions";
 
 interface UseGetInfinityProductsProp {
-  limit: number;
-  skip: number;
+  limit?: number;
+  skip?: number;
 }
 
 export function useGetInfinityProducts({
   limit = 15,
   skip = 0,
 }: UseGetInfinityProductsProp) {
-  return useInfiniteQuery({
+  return useSuspenseInfiniteQuery({
     queryKey: [`/products/${limit}/${skip}`],
-    queryFn: () =>
+    queryFn: (page) =>
       getProducts({
-        skip,
+        skip: page.pageParam + limit,
         limit,
       }),
     initialPageParam: 0,

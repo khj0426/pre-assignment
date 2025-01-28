@@ -23,6 +23,8 @@ const ProductContent = styled.div`
 `;
 
 export function ProductCard({ product }: { product: ProductListItem }) {
+  const isDeliveredOvernight =
+    product.shippingInformation === "Ships overnight";
   return (
     <ProductCardContainer>
       <img src={product.thumbnail} width={350} height={200} alt="상품 이미지" />
@@ -38,8 +40,27 @@ export function ProductCard({ product }: { product: ProductListItem }) {
         >
           {product.title}
         </h3>
-        <p>가격: {product.price} 원</p>
-        <p>평점: {product.rating}</p>
+        <span>별점: {product.rating}</span>
+        <span
+          style={{
+            marginLeft: "100px",
+          }}
+        >
+          가격: {product.price} 원
+        </span>
+        <p
+          style={{
+            padding: "5px",
+            borderRadius: "5px",
+            position: "relative",
+            bottom: "0",
+            right: "100",
+            color: "#45a049",
+          }}
+        >
+          {isDeliveredOvernight ? "오늘출발" : product.shippingInformation}
+        </p>
+
         <p>{product.shippingInformation}</p>
         <div
           style={{
@@ -54,17 +75,13 @@ export function ProductCard({ product }: { product: ProductListItem }) {
               backgroundColor: "#e0e0e0",
               padding: "5px",
               borderRadius: "5px",
+              position: "absolute",
+              top: "0",
+              left: "0",
             }}
           >
             {product.freeshipping ? "무료 배송" : "유료 배송"}
           </span>
-          <span
-            style={{
-              backgroundColor: "#e0e0e0",
-              padding: "5px",
-              borderRadius: "5px",
-            }}
-          ></span>
         </div>
       </ProductContent>
     </ProductCardContainer>

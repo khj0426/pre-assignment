@@ -28,7 +28,7 @@ export async function getProducts({
     if (!success) {
       throw new Error("데이터 형식이 올바르지 않습니다.");
     }
-    const products = data.products.map((product, index) => {
+    const newproducts = data.products.map((product, index) => {
       return {
         ...product,
         freeshipping: index % 2 === 0 ? true : false,
@@ -37,7 +37,7 @@ export async function getProducts({
 
     return {
       ...results,
-      products,
+      products: newproducts,
     };
   } catch (e) {
     if (e instanceof Error) {
