@@ -16,7 +16,7 @@ export async function getProducts({
     });
 
     const response = await fetch(
-      `https://dummyjson.com/products/${params.toString()}`
+      `https://dummyjson.com/products?${params.toString()}`
     );
 
     if (!response.ok) {
